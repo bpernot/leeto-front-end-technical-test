@@ -3,13 +3,13 @@ import axios from "axios"
 import { GiftCard } from "../types"
 
 const fetchGiftCards = async (): Promise<GiftCard[]> => {
-  const { data } = await axios.get<GiftCard[]>("http://localhost:3001/gift-cards")
+  const { data } = await axios.get<GiftCard[]>(`${import.meta.env.VITE_SERVER_APP_URL}/gift-cards`)
 
   return data
 }
 
 const fetchGiftCardDetail = async (id: string): Promise<GiftCard> => {
-  const { data } = await axios.get<GiftCard>(`http://localhost:3001/gift-cards/${id}`)
+  const { data } = await axios.get<GiftCard>(`${import.meta.env.VITE_SERVER_APP_URL}/gift-cards/${id}`)
 
   return data
 }
