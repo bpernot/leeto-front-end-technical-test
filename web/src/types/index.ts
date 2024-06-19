@@ -1,10 +1,10 @@
 export type GiftCard = {
-  id: number
+  id: string
   description: string
   name: string
   openingDate: string
   closingDate: string
-  state: "active" | "archived"
+  state: "active" | "archived" | undefined
   allowedAmount: number
   consumedAmount: number
   beneficiaries: {

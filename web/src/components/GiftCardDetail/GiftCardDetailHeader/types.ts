@@ -1,6 +1,6 @@
 export type GiftCardDetailHeaderProps = {
-  name: string | undefined
-  openingDate: string | undefined
-  closingDate: string | undefined
+  name: string
+  openingDate: string
+  closingDate: string
   state: string | undefined
 }

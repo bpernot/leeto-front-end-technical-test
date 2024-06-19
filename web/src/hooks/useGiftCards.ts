@@ -1,4 +1,4 @@
-import { UseQueryResult, useQuery } from "@tanstack/react-query"
+import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import { GiftCard } from "../types"
 
@@ -36,9 +36,27 @@ export const useGiftCards = (): {
   }
 }
 
-export const useGiftCardDetail = (id: string): UseQueryResult<GiftCard, Error> => {
-  return useQuery({
+export const useGiftCardDetail = (id: string): { cardDetail: GiftCard; isLoading: boolean; error: Error | null } => {
+  const { data, isLoading, error } = useQuery({
     queryKey: ["giftCard", id],
     queryFn: () => fetchGiftCardDetail(id),
   })
+
+  const cardDetail: GiftCard = {
+    id: data?.id || "",
+    name: data?.name || "",
+    openingDate: data?.openingDate || "",
+    closingDate: data?.closingDate || "",
+    state: data?.state,
+    allowedAmount: data?.allowedAmount || 0,
+    consumedAmount: data?.consumedAmount || 0,
+    description: data?.description || "",
+    beneficiaries: data?.beneficiaries || [],
+  }
+
+  return {
+    cardDetail,
+    isLoading,
+    error,
+  }
 }

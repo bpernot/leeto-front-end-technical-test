@@ -27,7 +27,7 @@ vi.mock("../../hooks/useGiftCards", () => ({
 describe("GiftCardDetail", () => {
   it("should render loading state correctly", () => {
     ;(useGiftCardDetail as Mock).mockReturnValue({
-      data: null,
+      cardDetail: null,
       isLoading: true,
       error: null,
     })
@@ -43,7 +43,7 @@ describe("GiftCardDetail", () => {
 
   it("should render error state correctly", () => {
     ;(useGiftCardDetail as Mock).mockReturnValue({
-      data: null,
+      cardDetail: null,
       isLoading: false,
       error: new Error("Error loading gift card details"),
     })
@@ -59,7 +59,7 @@ describe("GiftCardDetail", () => {
 
   it("should render gift card details correctly", () => {
     ;(useGiftCardDetail as Mock).mockReturnValue({
-      data: {
+      cardDetail: {
         name: "Test Card",
         openingDate: "2023-01-01",
         closingDate: "2023-12-31",
