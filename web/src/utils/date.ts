@@ -6,15 +6,14 @@ export const formatTimeDifference = (targetDate: string, isClosed: boolean): str
 
   if (daysDiff >= 365) {
     const years: number = Math.floor(daysDiff / 365)
-
     return `${isClosed ? "Clôturée il y a" : "Se clôture dans"} ${years} ${years > 1 ? "ans" : "an"}`
   } else if (daysDiff >= 30) {
     const months: number = Math.floor(daysDiff / 30)
-
-    return `${isClosed ? "Clôturée il y a" : "Se clôture dans"} ${months} ${months > 1 && "mois"}`
-  } else if (daysDiff >= 7) {
+    return `${isClosed ? "Clôturée il y a" : "Se clôture dans"} ${months} ${months > 1 ? "mois" : "mois"}`
+  } else if (daysDiff === 7) {
+    return `${isClosed ? "Clôturée il y a" : "Se clôture dans"} 1 semaine`
+  } else if (daysDiff >= 14) {
     const weeks: number = Math.floor(daysDiff / 7)
-
     return `${isClosed ? "Clôturée il y a" : "Se clôture dans"} ${weeks} ${weeks > 1 ? "semaines" : "semaine"}`
   } else {
     return `${isClosed ? "Clôturée il y a" : "Se clôture dans"} ${daysDiff} ${daysDiff > 1 ? "jours" : "jour"}`

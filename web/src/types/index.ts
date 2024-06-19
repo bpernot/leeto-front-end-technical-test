@@ -17,7 +17,3 @@ export type GiftCard = {
     }
   }[]
 }
-
-export type GiftCardItemProps = {
-  card: GiftCard
-}

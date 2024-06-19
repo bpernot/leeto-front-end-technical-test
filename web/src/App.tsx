@@ -1,7 +1,7 @@
 import React from "react"
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
-import GiftCardDetailPage from "./pages/GiftCardDetailPage"
-import HomePage from "./pages/HomePage"
+import GiftCardDetailPage from "./pages/GiftCardDetailPage/GiftCardDetailPage"
+import HomePage from "./pages/HomePage/HomePage"
 
 const App: React.FC = () => {
   return (

@@ -1,9 +1,5 @@
 import React from "react"
-
-type BeneficiaryIconProps = {
-  type: "user" | "companion" | "child"
-  isLast: boolean
-}
+import { BeneficiaryIconProps } from "./types"
 
 const BeneficiaryIcon: React.FC<BeneficiaryIconProps> = ({ type, isLast }) => {
   const getIcon = () => {
