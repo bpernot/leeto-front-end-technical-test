@@ -30,53 +30,56 @@ const Beneficiaries: React.FC<BeneficiariesProps> = ({ beneficiaries }) => {
 
         <h3 className="text-lg font-semibold mb-2 flex items-center">Suivi de consommation</h3>
 
-        <ul>
+        <ul className="grid grid-cols-2 gap-4">
           {beneficiaries.map((beneficiary, index) => (
             <React.Fragment key={beneficiary.id}>
-              {index === 0 ? (
-                <li className="mb-4">
-                  <BeneficiaryIcon type={beneficiary.type} isLast />
+              {beneficiaries.length <= 2 && (
+                <li className="mb-4 col-span-2 md:col-span-2">
                   <div className="flex items-center">
-                    <span className="ml-2">{beneficiary.firstName}</span>
-                    <span className="ml-2 text-sm text-gray-600">
-                      {beneficiary.consumption.consumedAmount} € / {beneficiary.consumption.allowedAmount} €
-                    </span>
-                  </div>
-                  <ProgressBar progress={(beneficiary.consumption.consumedAmount / beneficiary.consumption.allowedAmount) * 100} />
-                </li>
-              ) : index % 2 === 1 ? (
-                <li className="mb-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  <div className="flex items-center">
-                    <BeneficiaryIcon type={beneficiaries[index].type} isLast />
+                    <BeneficiaryIcon type={beneficiary.type} isLast />
                     <div className="ml-2 w-full">
-                      <span>{beneficiaries[index].firstName}</span>
+                      <span>{beneficiary.firstName}</span>
                       <span className="ml-2 text-sm text-gray-600">
-                        {beneficiaries[index].consumption.consumedAmount} € / {beneficiaries[index].consumption.allowedAmount} €
+                        {beneficiary.consumption.consumedAmount} € / {beneficiary.consumption.allowedAmount} €
                       </span>
-                      <ProgressBar
-                        progress={(beneficiaries[index].consumption.consumedAmount / beneficiaries[index].consumption.allowedAmount) * 100}
-                      />
+                      <ProgressBar progress={(beneficiary.consumption.consumedAmount / beneficiary.consumption.allowedAmount) * 100} />
                     </div>
                   </div>
+                </li>
+              )}
 
-                  {index + 1 < beneficiaries.length && (
+              {beneficiaries.length > 2 &&
+                (index === 0 ? (
+                  <li className="mb-4 col-span-2 md:col-span-2">
                     <div className="flex items-center">
-                      <BeneficiaryIcon type={beneficiaries[index + 1].type} isLast />
+                      <BeneficiaryIcon type={beneficiary.type} isLast />
                       <div className="ml-2 w-full">
-                        <span>{beneficiaries[index + 1].firstName}</span>
+                        <span>{beneficiary.firstName}</span>
                         <span className="ml-2 text-sm text-gray-600">
-                          {beneficiaries[index + 1].consumption.consumedAmount} € / {beneficiaries[index + 1].consumption.allowedAmount} €
+                          {beneficiary.consumption.consumedAmount} € / {beneficiary.consumption.allowedAmount} €
+                        </span>
+                        <ProgressBar progress={(beneficiary.consumption.consumedAmount / beneficiary.consumption.allowedAmount) * 100} />
+                      </div>
+                    </div>
+                  </li>
+                ) : (
+                  <li className="mb-4 col-span-2 md:col-span-1">
+                    <div className="flex items-center">
+                      <BeneficiaryIcon type={beneficiaries[index].type} isLast />
+                      <div className="ml-2 w-full">
+                        <span>{beneficiaries[index].firstName}</span>
+                        <span className="ml-2 text-sm text-gray-600">
+                          {beneficiaries[index].consumption.consumedAmount} € / {beneficiaries[index].consumption.allowedAmount} €
                         </span>
                         <ProgressBar
                           progress={
-                            (beneficiaries[index + 1].consumption.consumedAmount / beneficiaries[index + 1].consumption.allowedAmount) * 100
+                            (beneficiaries[index].consumption.consumedAmount / beneficiaries[index].consumption.allowedAmount) * 100
                           }
                         />
                       </div>
                     </div>
-                  )}
-                </li>
-              ) : null}
+                  </li>
+                ))}
             </React.Fragment>
           ))}
         </ul>
