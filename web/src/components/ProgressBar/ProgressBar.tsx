@@ -2,7 +2,7 @@ type ProgressBarProps = {
   progress: number
 }
 
-export default function ProgressBar({ progress }: ProgressBarProps) {
+const ProgressBar: React.FC<ProgressBarProps> = ({ progress }) => {
   return (
     <div className="flex items-center mt-1">
       <div className="w-full bg-gray-200 h-2 rounded-full">
@@ -13,3 +13,5 @@ export default function ProgressBar({ progress }: ProgressBarProps) {
     </div>
   )
 }
+
+export default ProgressBar
