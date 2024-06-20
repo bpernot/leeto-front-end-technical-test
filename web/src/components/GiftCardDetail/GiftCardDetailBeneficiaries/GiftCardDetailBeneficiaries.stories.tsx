@@ -3,7 +3,7 @@ import GiftCardDetailBeneficiaries from "./GiftCardDetailBeneficiaries"
 import { BeneficiariesProps } from "./types"
 
 export default {
-  title: "Components/Beneficiaries",
+  title: "Components/GiftCardDetailBeneficiaries",
   component: GiftCardDetailBeneficiaries,
 } as Meta
 

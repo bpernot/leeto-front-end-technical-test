@@ -7,7 +7,7 @@ import BeneficiaryIcon from "../../BeneficiaryIcon/BeneficiaryIcon"
 import ProgressBar from "../../ProgressBar/ProgressBar"
 import { BeneficiariesProps } from "./types"
 
-const Beneficiaries: React.FC<BeneficiariesProps> = ({ beneficiaries }) => {
+const GiftCardDetailBeneficiaries: React.FC<BeneficiariesProps> = ({ beneficiaries }) => {
   const eligibleText: string = beneficiaries.length === 1 ? "est éligible" : "sont éligibles"
 
   return (
@@ -108,4 +108,4 @@ const Beneficiaries: React.FC<BeneficiariesProps> = ({ beneficiaries }) => {
   )
 }
 
-export default Beneficiaries
+export default GiftCardDetailBeneficiaries
