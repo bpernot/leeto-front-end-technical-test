@@ -1,11 +1,15 @@
 import React from "react"
 import familyRestroom from "../../../assets/images/family_restroom.svg"
 import stackedLineChart from "../../../assets/images/stacked_line_chart.svg"
+import { calculatedProgress } from "../../../utils/amount"
+import { formatBeneficiaryNames } from "../../../utils/beneficiary"
 import BeneficiaryIcon from "../../BeneficiaryIcon/BeneficiaryIcon"
 import ProgressBar from "../../ProgressBar/ProgressBar"
 import { BeneficiariesProps } from "./types"
 
 const Beneficiaries: React.FC<BeneficiariesProps> = ({ beneficiaries }) => {
+  const eligibleText: string = beneficiaries.length === 1 ? "est éligible" : "sont éligibles"
+
   return (
     <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
       <div className="p-4 rounded-lg shadow">
@@ -19,7 +23,9 @@ const Beneficiaries: React.FC<BeneficiariesProps> = ({ beneficiaries }) => {
           {beneficiaries.map((beneficiary, index) => (
             <BeneficiaryIcon key={beneficiary.id} type={beneficiary.type} isLast={index === beneficiaries.length - 1} />
           ))}
-          <p className="text-gray-600 ml-2">{beneficiaries.map((b) => b.firstName).join(", ")} sont éligibles.</p>
+          <p className="text-gray-600 ml-2">
+            {formatBeneficiaryNames(beneficiaries)} {eligibleText}.
+          </p>
         </div>
       </div>
 
@@ -38,11 +44,16 @@ const Beneficiaries: React.FC<BeneficiariesProps> = ({ beneficiaries }) => {
                   <div className="flex items-center">
                     <BeneficiaryIcon type={beneficiary.type} isLast />
                     <div className="ml-2 w-full">
-                      <span>{beneficiary.firstName}</span>
-                      <span className="ml-2 text-sm text-gray-600">
-                        {beneficiary.consumption.consumedAmount} € / {beneficiary.consumption.allowedAmount} €
-                      </span>
-                      <ProgressBar progress={(beneficiary.consumption.consumedAmount / beneficiary.consumption.allowedAmount) * 100} />
+                      <div className="flex items-center">
+                        <span>{beneficiary.type === "user" ? "Vous-même" : beneficiary.firstName}</span>
+                        <span className="mx-2 text-gray-600">•</span>
+                        <span className="text-sm text-gray-600">
+                          {beneficiary.consumption.consumedAmount} € / {beneficiary.consumption.allowedAmount} €
+                        </span>
+                      </div>
+                      <ProgressBar
+                        progress={calculatedProgress(beneficiary.consumption.consumedAmount, beneficiary.consumption.allowedAmount)}
+                      />
                     </div>
                   </div>
                 </li>
@@ -54,11 +65,16 @@ const Beneficiaries: React.FC<BeneficiariesProps> = ({ beneficiaries }) => {
                     <div className="flex items-center">
                       <BeneficiaryIcon type={beneficiary.type} isLast />
                       <div className="ml-2 w-full">
-                        <span>{beneficiary.firstName}</span>
-                        <span className="ml-2 text-sm text-gray-600">
-                          {beneficiary.consumption.consumedAmount} € / {beneficiary.consumption.allowedAmount} €
-                        </span>
-                        <ProgressBar progress={(beneficiary.consumption.consumedAmount / beneficiary.consumption.allowedAmount) * 100} />
+                        <div className="flex items-center">
+                          <span>{beneficiary.type === "user" ? "Vous-même" : beneficiary.firstName}</span>
+                          <span className="mx-2 text-gray-600">•</span>
+                          <span className="text-sm mt-0.5 text-gray-600">
+                            {beneficiary.consumption.consumedAmount} € / {beneficiary.consumption.allowedAmount} €
+                          </span>
+                        </div>
+                        <ProgressBar
+                          progress={calculatedProgress(beneficiary.consumption.consumedAmount, beneficiary.consumption.allowedAmount)}
+                        />
                       </div>
                     </div>
                   </li>
@@ -67,14 +83,18 @@ const Beneficiaries: React.FC<BeneficiariesProps> = ({ beneficiaries }) => {
                     <div className="flex items-center">
                       <BeneficiaryIcon type={beneficiaries[index].type} isLast />
                       <div className="ml-2 w-full">
-                        <span>{beneficiaries[index].firstName}</span>
-                        <span className="ml-2 text-sm text-gray-600">
-                          {beneficiaries[index].consumption.consumedAmount} € / {beneficiaries[index].consumption.allowedAmount} €
-                        </span>
+                        <div className="flex items-center">
+                          <span>{beneficiaries[index].type === "user" ? "Vous-même" : beneficiaries[index].firstName}</span>
+                          <span className="mx-2 text-gray-600">•</span>
+                          <span className="text-sm mt-0.5 text-gray-600">
+                            {beneficiaries[index].consumption.consumedAmount} € / {beneficiaries[index].consumption.allowedAmount} €
+                          </span>
+                        </div>
                         <ProgressBar
-                          progress={
-                            (beneficiaries[index].consumption.consumedAmount / beneficiaries[index].consumption.allowedAmount) * 100
-                          }
+                          progress={calculatedProgress(
+                            beneficiaries[index].consumption.consumedAmount,
+                            beneficiaries[index].consumption.allowedAmount
+                          )}
                         />
                       </div>
                     </div>

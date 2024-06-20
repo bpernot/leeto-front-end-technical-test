@@ -6,11 +6,11 @@ import { GiftCardDetailHeaderProps } from "./types"
 const GiftCardDetailHeader: React.FC<GiftCardDetailHeaderProps> = ({ name, openingDate, closingDate, state }) => {
   return (
     <div className="flex flex-col items-start mb-4">
-      <div className="bg-pink-100 p-3 rounded-md">
+      <div className="bg-pink-100 p-3 mb-1 rounded-md">
         <img src={giftCard} alt="gift card logo" className="h-6 w-6" />
       </div>
 
-      <h2 className="text-2xl font-semibold">{name}</h2>
+      <h2 className="text-2xl font-semibold mb-1">{name}</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 md:space-x-2 items-center text-sm text-gray-600">
         <span className="flex items-center">

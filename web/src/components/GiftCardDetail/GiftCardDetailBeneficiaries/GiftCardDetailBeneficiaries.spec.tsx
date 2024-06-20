@@ -47,13 +47,13 @@ describe("GiftCardDetailBeneficiaries", () => {
     render(<GiftCardDetailBeneficiaries {...defaultProps} />)
 
     expect(screen.getByText("Quel(s) ayant(s)-droit validés bénéficient de cette cagnotte ?")).toBeInTheDocument()
-    expect(screen.getByText("John, Jane, Doe sont éligibles.")).toBeInTheDocument()
+    expect(screen.getByText("Vous-même, Jane et Doe sont éligibles.")).toBeInTheDocument()
   })
 
   it("should render the consumption tracking correctly", () => {
     render(<GiftCardDetailBeneficiaries {...defaultProps} />)
 
-    expect(screen.getByText("John")).toBeInTheDocument()
+    expect(screen.getByText("Vous-même")).toBeInTheDocument()
     expect(screen.getByText("50 € / 100 €")).toBeInTheDocument()
     expect(screen.getByText("50%")).toBeInTheDocument()
 
@@ -64,5 +64,54 @@ describe("GiftCardDetailBeneficiaries", () => {
     expect(screen.getByText("Doe")).toBeInTheDocument()
     expect(screen.getByText("20 € / 50 €")).toBeInTheDocument()
     expect(screen.getByText("40%")).toBeInTheDocument()
+  })
+
+  it("should render correctly for two beneficiaries", () => {
+    const twoBeneficiariesProps: BeneficiariesProps = {
+      beneficiaries: [
+        {
+          id: 1,
+          firstName: "John",
+          type: "user",
+          consumption: {
+            consumedAmount: 50,
+            allowedAmount: 100,
+          },
+        },
+        {
+          id: 2,
+          firstName: "Jane",
+          type: "companion",
+          consumption: {
+            consumedAmount: 30,
+            allowedAmount: 100,
+          },
+        },
+      ],
+    }
+
+    render(<GiftCardDetailBeneficiaries {...twoBeneficiariesProps} />)
+
+    expect(screen.getByText("Vous-même et Jane sont éligibles.")).toBeInTheDocument()
+  })
+
+  it("should render correctly for one beneficiary", () => {
+    const oneBeneficiaryProps: BeneficiariesProps = {
+      beneficiaries: [
+        {
+          id: 1,
+          firstName: "John",
+          type: "user",
+          consumption: {
+            consumedAmount: 50,
+            allowedAmount: 100,
+          },
+        },
+      ],
+    }
+
+    render(<GiftCardDetailBeneficiaries {...oneBeneficiaryProps} />)
+
+    expect(screen.getByText("Vous-même est éligible.")).toBeInTheDocument()
   })
 })

@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 import giftCard from "../../assets/images/gift_card.svg"
 import { GiftCard } from "../../types"
+import { calculatedProgress } from "../../utils/amount"
 import { formatTimeDifference } from "../../utils/date"
 import ProgressBar from "../ProgressBar/ProgressBar"
 
@@ -10,8 +11,6 @@ type GiftCardItemProps = {
 }
 
 const GiftCardItem: React.FC<GiftCardItemProps> = ({ card }) => {
-  const progress: number = (card.consumedAmount / card.allowedAmount) * 100
-
   return (
     <Link to={`/gift-card/${card.id}`} className="block bg-white shadow rounded-lg p-4 hover:bg-gray-100">
       <div className="flex flex-col items-start">
@@ -30,7 +29,7 @@ const GiftCardItem: React.FC<GiftCardItemProps> = ({ card }) => {
           {card.consumedAmount} € dépensés / {card.allowedAmount} €
         </p>
 
-        <ProgressBar progress={progress} />
+        <ProgressBar progress={calculatedProgress(card.consumedAmount, card.allowedAmount)} />
       </div>
     </Link>
   )
