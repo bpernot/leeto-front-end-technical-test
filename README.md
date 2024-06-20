@@ -50,25 +50,36 @@ https://www.figma.com/design/pHiuVYjR31D0tUkavDIsTs/front-end-case?node-id=1-277
 
 ```typescript
 type GiftCard = {
-  id: number;
-  description: string;
-  name: string;
-  openingDate: string;
-  closingDate: string;
-  state: "active" | "archived";
-  allowedAmount: number;
-  consumedAmount: number;
+  id: number
+  description: string
+  name: string
+  openingDate: string
+  closingDate: string
+  state: "active" | "archived"
+  allowedAmount: number
+  consumedAmount: number
   beneficiaries: {
-    id: number;
-    type: "user" | "companion" | "child";
-    firstName: string;
+    id: number
+    type: "user" | "companion" | "child"
+    firstName: string
     consumption: {
-      allowedAmount: number;
-      consumedAmount: number;
-    };
-  }[];
-};
+      allowedAmount: number
+      consumedAmount: number
+    }
+  }[]
+}
 ```
+
+### WEBAPP
+
+#### Installation
+
+1. Aller dans `cd web/`
+2. Installer les dépendances : `yarn install`
+3. Démarrer l'application : `yarn dev`
+4. Démarrer les tests : `yarn test`
+5. Démarrer Storybook : `yarn storybook`
+6. Lancer le coverage des tests : `yarn coverage`
 
 ## Bonus
 
