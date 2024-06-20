@@ -11,7 +11,7 @@ const GiftCardDetailBeneficiaries: React.FC<BeneficiariesProps> = ({ beneficiari
   const eligibleText: string = beneficiaries.length === 1 ? "est éligible" : "sont éligibles"
 
   return (
-    <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="mt-6 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6">
       <div className="p-4 rounded-lg shadow">
         <div className="p-3 rounded-md w-11 mb-2" style={{ backgroundColor: "#DCFCE7" }}>
           <img src={familyRestroom} alt="gift card logo" className="h-5 w-5" />
