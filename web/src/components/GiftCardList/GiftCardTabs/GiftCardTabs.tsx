@@ -1,6 +1,6 @@
 import { GiftCardTabsProps } from "./types"
 
-export default function GiftCardTabs({ state, setState, activeCards, archivedCards }: GiftCardTabsProps) {
+const GiftCardTabs: React.FC<GiftCardTabsProps> = ({ state, setState, activeCards, archivedCards }) => {
   return (
     <div className="border-b border-gray-300 mb-6">
       <div className="flex space-x-4">
@@ -27,3 +27,5 @@ export default function GiftCardTabs({ state, setState, activeCards, archivedCar
     </div>
   )
 }
+
+export default GiftCardTabs
