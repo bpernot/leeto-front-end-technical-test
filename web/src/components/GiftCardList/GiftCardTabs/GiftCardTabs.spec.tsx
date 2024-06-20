@@ -5,7 +5,7 @@ import { GiftCardTabsProps } from "./types"
 
 const mockActiveCards: GiftCard[] = [
   {
-    id: 1,
+    id: "1",
     description: "Description 1",
     name: "Card 1",
     openingDate: "2022-01-01",
@@ -29,7 +29,7 @@ const mockActiveCards: GiftCard[] = [
 
 const mockArchivedCards: GiftCard[] = [
   {
-    id: 2,
+    id: "2",
     description: "Description 2",
     name: "Card 2",
     openingDate: "2021-01-01",

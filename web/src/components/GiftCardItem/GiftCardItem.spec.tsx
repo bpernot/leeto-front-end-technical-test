@@ -8,7 +8,7 @@ vi.mock("../../utils/date", () => ({
 }))
 
 const mockGiftCard: GiftCard = {
-  id: 1,
+  id: "1",
   description: "Description 1",
   name: "Card 1",
   openingDate: "2022-01-01",

@@ -1,4 +1,3 @@
-// GiftCardDescription.test.tsx
 import { render, screen } from "@testing-library/react"
 import GiftCardDetailDescription from "./GiftCardDetailDescription"
 
