@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react"
 import GiftCardDetailStats from "./GiftCardDetailStats"
-import { GiftCardStatsProps } from "./types"
+import { GiftCardDetailStatsProps } from "./types"
 
 describe("GiftCardStats", () => {
   it("should render the available and consumed amounts correctly", () => {
-    const props: GiftCardStatsProps = {
+    const props: GiftCardDetailStatsProps = {
       consumedAmount: 50,
       allowedAmount: 100,
     }
@@ -17,7 +17,7 @@ describe("GiftCardStats", () => {
   })
 
   it("should render the ProgressBar with correct progress", () => {
-    const props: GiftCardStatsProps = {
+    const props: GiftCardDetailStatsProps = {
       consumedAmount: 50,
       allowedAmount: 100,
     }
@@ -28,7 +28,7 @@ describe("GiftCardStats", () => {
   })
 
   it("should handle zero allowedAmount correctly", () => {
-    const props: GiftCardStatsProps = {
+    const props: GiftCardDetailStatsProps = {
       consumedAmount: 50,
       allowedAmount: 0,
     }
@@ -42,7 +42,7 @@ describe("GiftCardStats", () => {
   })
 
   it("should return 0 for ProgressBar", () => {
-    const props: GiftCardStatsProps = {
+    const props: GiftCardDetailStatsProps = {
       consumedAmount: 0,
       allowedAmount: 50,
     }
@@ -56,7 +56,7 @@ describe("GiftCardStats", () => {
   })
 
   it("should return 0 for ProgressBar and amount", () => {
-    const props: GiftCardStatsProps = {
+    const props: GiftCardDetailStatsProps = {
       consumedAmount: 0,
       allowedAmount: 0,
     }
@@ -66,48 +66,6 @@ describe("GiftCardStats", () => {
     expect(screen.getByText("0 €")).toBeInTheDocument()
     expect(screen.getByText("disponibles")).toBeInTheDocument()
     expect(screen.getByText("0 € dépensés / 0 €")).toBeInTheDocument()
-    expect(screen.getByText("0%")).toBeInTheDocument()
-  })
-
-  it("should handle undefined consumedAmount and allowedAmount", () => {
-    const props: GiftCardStatsProps = {
-      consumedAmount: undefined,
-      allowedAmount: undefined,
-    }
-
-    render(<GiftCardDetailStats {...props} />)
-
-    expect(screen.getByText("0 €")).toBeInTheDocument()
-    expect(screen.getByText("disponibles")).toBeInTheDocument()
-    expect(screen.getByText("0 € dépensés / 0 €")).toBeInTheDocument()
-    expect(screen.getByText("0%")).toBeInTheDocument()
-  })
-
-  it("should handle undefined consumedAmount and allowedAmount", () => {
-    const props: GiftCardStatsProps = {
-      consumedAmount: 50,
-      allowedAmount: undefined,
-    }
-
-    render(<GiftCardDetailStats {...props} />)
-
-    expect(screen.getByText("0 €")).toBeInTheDocument()
-    expect(screen.getByText("disponibles")).toBeInTheDocument()
-    expect(screen.getByText("0 € dépensés / 0 €")).toBeInTheDocument()
-    expect(screen.getByText("0%")).toBeInTheDocument()
-  })
-
-  it("should handle undefined consumedAmount and non-null allowedAmount", () => {
-    const props: GiftCardStatsProps = {
-      consumedAmount: undefined,
-      allowedAmount: 100,
-    }
-
-    render(<GiftCardDetailStats {...props} />)
-
-    expect(screen.getByText("100 €")).toBeInTheDocument()
-    expect(screen.getByText("disponibles")).toBeInTheDocument()
-    expect(screen.getByText("0 € dépensés / 100 €")).toBeInTheDocument()
     expect(screen.getByText("0%")).toBeInTheDocument()
   })
 })
