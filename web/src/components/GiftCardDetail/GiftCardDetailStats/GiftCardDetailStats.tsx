@@ -1,9 +1,9 @@
 import React from "react"
 import { availableAmount, calculatedProgress, displayAllowedAmount, displayConsumedAmount } from "../../../utils/amount"
 import ProgressBar from "../../ProgressBar/ProgressBar"
-import { GiftCardStatsProps } from "./types"
+import { GiftCardDetailStatsProps } from "./types"
 
-const GiftCardStats: React.FC<GiftCardStatsProps> = ({ consumedAmount, allowedAmount }) => {
+const GiftCardDetailStats: React.FC<GiftCardDetailStatsProps> = ({ consumedAmount, allowedAmount }) => {
   return (
     <div className="flex items-center space-x-4">
       <div className="flex flex-col items-baseline mb-4">
@@ -20,4 +20,4 @@ const GiftCardStats: React.FC<GiftCardStatsProps> = ({ consumedAmount, allowedAm
   )
 }
 
-export default GiftCardStats
+export default GiftCardDetailStats

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react"
 import GiftCardDetailDescription from "./GiftCardDetailDescription"
 
-describe("GiftCardDescription", () => {
+describe("GiftCardDetailDescription", () => {
   it("renders the description correctly", () => {
     const description: string = "Ceci est une description de la carte-cadeau."
     render(<GiftCardDetailDescription description={description} />)
