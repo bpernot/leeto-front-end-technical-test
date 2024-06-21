@@ -25,6 +25,10 @@ vi.mock("../../hooks/useGiftCards", () => ({
 }))
 
 describe("GiftCardDetail", () => {
+  afterEach(() => {
+    vi.clearAllMocks()
+  })
+
   it("should render loading state correctly", () => {
     ;(useGiftCardDetail as Mock).mockReturnValue({
       cardDetail: null,
@@ -54,12 +58,13 @@ describe("GiftCardDetail", () => {
       </BrowserRouter>
     )
 
-    expect(screen.getByText("Error loading gift card details")).toBeInTheDocument()
+    expect(screen.getByText((content) => content.startsWith("Error loading gift card details"))).toBeInTheDocument()
   })
 
   it("should render gift card details correctly", () => {
     ;(useGiftCardDetail as Mock).mockReturnValue({
       cardDetail: {
+        id: "1",
         name: "Test Card",
         openingDate: "2023-01-01",
         closingDate: "2023-12-31",

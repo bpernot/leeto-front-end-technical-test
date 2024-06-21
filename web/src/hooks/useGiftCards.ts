@@ -47,7 +47,7 @@ export const useGiftCards = (): {
   isLoading: boolean
   error: Error | null
 } => {
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error } = useQuery<GiftCard[], Error>({
     queryKey: ["giftCards"],
     queryFn: fetchGiftCards,
   })
@@ -65,7 +65,7 @@ export const useGiftCards = (): {
 
 // custom hook to fetch the detail of a gift card
 export const useGiftCardDetail = (id: string): { cardDetail: GiftCard; isLoading: boolean; error: Error | null } => {
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error } = useQuery<GiftCard, Error>({
     queryKey: ["giftCard", id],
     queryFn: () => fetchGiftCardDetail(id),
   })
@@ -75,7 +75,7 @@ export const useGiftCardDetail = (id: string): { cardDetail: GiftCard; isLoading
     name: data?.name || "",
     openingDate: data?.openingDate || "",
     closingDate: data?.closingDate || "",
-    state: data?.state,
+    state: data?.state || "active",
     allowedAmount: data?.allowedAmount || 0,
     consumedAmount: data?.consumedAmount || 0,
     description: data?.description || "",

@@ -118,7 +118,7 @@ describe("useGiftCardDetail", () => {
       name: "",
       openingDate: "",
       closingDate: "",
-      state: undefined,
+      state: "active",
       allowedAmount: 0,
       consumedAmount: 0,
       description: "",

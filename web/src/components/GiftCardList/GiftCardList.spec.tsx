@@ -108,7 +108,7 @@ describe("GiftCardList", () => {
       </MemoryRouter>
     )
 
-    expect(screen.getByText("Error loading gift cards")).toBeInTheDocument()
+    expect(screen.getByText((content) => content.startsWith("Error loading gift cards"))).toBeInTheDocument()
   })
 
   it("should render active gift cards correctly", () => {

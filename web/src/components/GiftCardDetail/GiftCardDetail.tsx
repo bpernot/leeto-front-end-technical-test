@@ -12,7 +12,13 @@ const GiftCardDetail: React.FC = () => {
   const { cardDetail, isLoading, error } = useGiftCardDetail(id ?? "")
 
   if (isLoading) return <div>Loading...</div>
-  if (error) return <div>Error loading gift card details</div>
+  if (error)
+    return (
+      <>
+        <div>Error loading gift card details: {error.message}</div>
+        <ReturnButton />
+      </>
+    )
 
   return (
     <div className="container mx-auto px-4 py-6">

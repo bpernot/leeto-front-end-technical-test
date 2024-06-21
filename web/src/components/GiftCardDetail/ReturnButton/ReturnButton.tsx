@@ -1,8 +1,8 @@
 import React from "react"
-import { useNavigate } from "react-router-dom"
+import { NavigateFunction, useNavigate } from "react-router-dom"
 
 const ReturnButton: React.FC = () => {
-  const navigate = useNavigate()
+  const navigate: NavigateFunction = useNavigate()
 
   return (
     <div className="flex items-center sm:px-5 w-72 ml-6 sm:-ml-0 sm:cursor-pointer">
