@@ -33,7 +33,7 @@ const GiftCardDetail: React.FC = () => {
         />
         <GiftCardDetailStats consumedAmount={cardDetail.consumedAmount} allowedAmount={cardDetail.allowedAmount} />
         <GiftcardDetailDescription description={cardDetail.description} />
-        {cardDetail.beneficiaries && <GiftCardDetailBeneficiaries beneficiaries={cardDetail.beneficiaries} />}
+        <GiftCardDetailBeneficiaries beneficiaries={cardDetail.beneficiaries} />
       </div>
     </div>
   )
