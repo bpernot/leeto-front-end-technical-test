@@ -15,7 +15,7 @@ const GiftCardItem: React.FC<GiftCardItemProps> = ({ card }) => {
     <Link to={`/gift-card/${card.id}`} className="block bg-white shadow rounded-lg p-4 hover:bg-gray-100">
       <div className="flex flex-col items-start">
         <div className="bg-pink-100 p-2 rounded-md mb-2">
-          <img src={giftCard} alt="gift card logo" className="h-5 w-5" />
+          <img src={giftCard} loading="lazy" alt="gift card logo" className="h-5 w-5" />
         </div>
 
         <div>
