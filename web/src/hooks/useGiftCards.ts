@@ -4,16 +4,40 @@ import { GiftCard } from "../types"
 
 // fetch the list of gift cards
 const fetchGiftCards = async (): Promise<GiftCard[]> => {
-  const { data } = await axios.get<GiftCard[]>(`${import.meta.env.VITE_SERVER_APP_URL}/gift-cards`)
+  try {
+    const { data } = await axios.get<GiftCard[]>(`${import.meta.env.VITE_SERVER_APP_URL}/gift-cards`)
 
-  return data
+    return data
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("Erreur Axios:", error.message)
+
+      throw new Error(`Erreur Axios lors de la récupération des cartes cadeaux: ${error.message}`)
+    } else {
+      console.error("Erreur inconnue:", error)
+
+      throw new Error("Une erreur inconnue est survenue lors de la récupération des cartes cadeaux.")
+    }
+  }
 }
 
 // fetch the detail of a gift card
 const fetchGiftCardDetail = async (id: string): Promise<GiftCard> => {
-  const { data } = await axios.get<GiftCard>(`${import.meta.env.VITE_SERVER_APP_URL}/gift-cards/${id}`)
+  try {
+    const { data } = await axios.get<GiftCard>(`${import.meta.env.VITE_SERVER_APP_URL}/gift-cards/${id}`)
 
-  return data
+    return data
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("Erreur Axios:", error.message)
+
+      throw new Error(`Erreur Axios lors de la récupération des détails de la carte cadeau: ${error.message}`)
+    } else {
+      console.error("Erreur inconnue:", error)
+
+      throw new Error("Une erreur inconnue est survenue lors de la récupération des détails de la carte cadeau.")
+    }
+  }
 }
 
 // custom hook to fetch the list of gift cards
