@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query"
 import { renderHook } from "@testing-library/react-hooks"
 import { Mock } from "vitest"
 import { GiftCard } from "../types"
-import { useGiftCardDetail, useGiftCards } from "./useGiftCards"
+import { useActiveGiftCards, useArchivedGiftCards, useGiftCardDetail } from "./useGiftCards"
 
 vi.mock("axios")
 
@@ -12,12 +12,12 @@ vi.mock("@tanstack/react-query", () => ({
 
 const mockedUseQuery = useQuery as Mock
 
-describe("useGiftCards", () => {
+describe("useActiveGiftCards", () => {
   afterEach(() => {
     vi.clearAllMocks()
   })
 
-  const mockData: GiftCard[] = [
+  const mockActiveCards: GiftCard[] = [
     {
       id: "1",
       description: "Test card 1",
@@ -29,6 +29,29 @@ describe("useGiftCards", () => {
       consumedAmount: 50,
       beneficiaries: [],
     },
+  ]
+
+  it("should fetch and return active gift cards", async () => {
+    mockedUseQuery.mockReturnValue({
+      data: mockActiveCards,
+      isLoading: false,
+      error: null,
+    })
+
+    const { result } = renderHook(() => useActiveGiftCards())
+
+    expect(result.current.data).toEqual(mockActiveCards)
+    expect(result.current.isLoading).toBe(false)
+    expect(result.current.error).toBe(null)
+  })
+})
+
+describe("useArchivedGiftCards", () => {
+  afterEach(() => {
+    vi.clearAllMocks()
+  })
+
+  const mockArchivedCards: GiftCard[] = [
     {
       id: "2",
       description: "Test card 2",
@@ -42,34 +65,18 @@ describe("useGiftCards", () => {
     },
   ]
 
-  it("should fetch and return gift cards", async () => {
+  it("should fetch and return archived gift cards", async () => {
     mockedUseQuery.mockReturnValue({
-      data: mockData,
+      data: mockArchivedCards,
       isLoading: false,
       error: null,
     })
 
-    const { result } = renderHook(() => useGiftCards())
+    const { result } = renderHook(() => useArchivedGiftCards())
 
-    expect(result.current.activeCards).toEqual([mockData[0]])
-    expect(result.current.archivedCards).toEqual([mockData[1]])
+    expect(result.current.data).toEqual(mockArchivedCards)
     expect(result.current.isLoading).toBe(false)
     expect(result.current.error).toBe(null)
-  })
-
-  it("should handle errors", async () => {
-    mockedUseQuery.mockReturnValue({
-      data: null,
-      isLoading: true,
-      error: null,
-    })
-
-    const { result } = renderHook(() => useGiftCards())
-
-    expect(result.current.activeCards).toEqual([])
-    expect(result.current.archivedCards).toEqual([])
-    expect(result.current.isLoading).toBe(true)
-    expect(result.current.error).toBeNull()
   })
 })
 
@@ -99,7 +106,7 @@ describe("useGiftCardDetail", () => {
 
     const { result } = renderHook(() => useGiftCardDetail("1"))
 
-    expect(result.current.cardDetail).toEqual(mockDetail)
+    expect(result.current.data).toEqual(mockDetail)
     expect(result.current.isLoading).toBe(false)
     expect(result.current.error).toBe(null)
   })
@@ -113,17 +120,7 @@ describe("useGiftCardDetail", () => {
 
     const { result } = renderHook(() => useGiftCardDetail("1"))
 
-    expect(result.current.cardDetail).toStrictEqual({
-      id: "",
-      name: "",
-      openingDate: "",
-      closingDate: "",
-      state: "active",
-      allowedAmount: 0,
-      consumedAmount: 0,
-      description: "",
-      beneficiaries: [],
-    })
+    expect(result.current.data).toBeNull()
     expect(result.current.isLoading).toBe(false)
     expect(result.current.error).toBeInstanceOf(Error)
   })

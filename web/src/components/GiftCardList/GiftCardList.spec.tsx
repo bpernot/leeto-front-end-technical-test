@@ -1,19 +1,13 @@
 import { fireEvent, render, screen } from "@testing-library/react"
 import { MemoryRouter } from "react-router-dom"
-import { useGiftCards } from "../../hooks/useGiftCards"
+import { useActiveGiftCards, useArchivedGiftCards } from "../../hooks/useGiftCards"
 import { GiftCard } from "../../types"
 import GiftCardList from "./GiftCardList"
 
 vi.mock("../../hooks/useGiftCards")
 
-const mockUseGiftCards: jest.MockedFunction<
-  () => {
-    activeCards: GiftCard[]
-    archivedCards: GiftCard[]
-    isLoading: boolean
-    error: Error | null
-  }
-> = useGiftCards as jest.MockedFunction<typeof useGiftCards>
+const mockUseActiveGiftCards = useActiveGiftCards as jest.MockedFunction<typeof useActiveGiftCards>
+const mockUseArchivedGiftCards = useArchivedGiftCards as jest.MockedFunction<typeof useArchivedGiftCards>
 
 const mockActiveCards: GiftCard[] = [
   {
@@ -65,9 +59,15 @@ const mockArchivedCards: GiftCard[] = [
 
 describe("GiftCardList", () => {
   beforeEach(() => {
-    mockUseGiftCards.mockReturnValue({
-      activeCards: mockActiveCards,
-      archivedCards: mockArchivedCards,
+    // @ts-expect-error
+    mockUseActiveGiftCards.mockReturnValue({
+      data: mockActiveCards,
+      isLoading: false,
+      error: null,
+    })
+    // @ts-expect-error
+    mockUseArchivedGiftCards.mockReturnValue({
+      data: mockArchivedCards,
       isLoading: false,
       error: null,
     })
@@ -78,9 +78,9 @@ describe("GiftCardList", () => {
   })
 
   it("should render loading state correctly", () => {
-    mockUseGiftCards.mockReturnValue({
-      activeCards: [],
-      archivedCards: [],
+    // @ts-expect-error
+    mockUseActiveGiftCards.mockReturnValue({
+      data: undefined,
       isLoading: true,
       error: null,
     })
@@ -95,9 +95,9 @@ describe("GiftCardList", () => {
   })
 
   it("should render error state correctly", () => {
-    mockUseGiftCards.mockReturnValue({
-      activeCards: [],
-      archivedCards: [],
+    // @ts-expect-error
+    mockUseActiveGiftCards.mockReturnValue({
+      data: undefined,
       isLoading: false,
       error: new Error("Error loading gift cards"),
     })

@@ -31,7 +31,7 @@ describe("GiftCardDetail", () => {
 
   it("should render loading state correctly", () => {
     ;(useGiftCardDetail as Mock).mockReturnValue({
-      cardDetail: null,
+      data: null,
       isLoading: true,
       error: null,
     })
@@ -47,7 +47,7 @@ describe("GiftCardDetail", () => {
 
   it("should render error state correctly", () => {
     ;(useGiftCardDetail as Mock).mockReturnValue({
-      cardDetail: null,
+      data: null,
       isLoading: false,
       error: new Error("Error loading gift card details"),
     })
@@ -63,7 +63,7 @@ describe("GiftCardDetail", () => {
 
   it("should render gift card details correctly", () => {
     ;(useGiftCardDetail as Mock).mockReturnValue({
-      cardDetail: {
+      data: {
         id: "1",
         name: "Test Card",
         openingDate: "2023-01-01",

@@ -9,7 +9,7 @@ import ReturnButton from "./ReturnButton/ReturnButton"
 
 const GiftCardDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>()
-  const { cardDetail, isLoading, error } = useGiftCardDetail(id ?? "")
+  const { data: cardDetail, isLoading, error } = useGiftCardDetail(id ?? "")
 
   if (isLoading) return <div>Loading...</div>
   if (error)
@@ -19,6 +19,7 @@ const GiftCardDetail: React.FC = () => {
         <ReturnButton />
       </>
     )
+  if (!cardDetail) return <div>No gift card details found</div>
 
   return (
     <div className="container mx-auto px-4 py-6">
